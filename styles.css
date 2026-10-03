@@ -1,0 +1,256 @@
+/* Yearbook Order Help — one stylesheet for the help station and the staff desk.
+   The look follows blackpinecircle.org: pale sage page, plum-brown text, the olive
+   header band, light Manrope headings over Fira Sans, and pill buttons in the
+   school's blue and lime with a soft drop shadow. The colours are all here. */
+
+:root {
+  color-scheme: light;
+  --page: #ebf1df;        /* pale sage page background */
+  --card: #ffffff;
+  --cream: #f3f0e5;
+  --sand: #e3ddc8;
+  --ink: #472a2b;         /* plum-brown body text */
+  --ink-head: #3e2b2e;
+  --ink-soft: #7a6566;
+  --plum: #2e1c23;        /* the dark footer band */
+  --olive: #8c9a4b;       /* header band */
+  --olive-deep: #5f6b2c;
+  --lime: #b8c86a;
+  --blue: #3367b5;
+  --blue-deep: #28549a;
+  --red: #a8322a;
+  --rule: #d5dcc3;
+  --lift: 0 4px 4px rgba(0, 0, 0, 0.25);
+  --soft: 0 10px 30px rgba(46, 28, 35, 0.10);
+  --head: Manrope, "Avenir Next", system-ui, sans-serif;
+  --body: "Fira Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "Fira Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 17px/1.5 var(--body);
+}
+h1, h2, h3, p { margin: 0; }
+h1, h2 { font-family: var(--head); font-weight: 300; letter-spacing: -0.03em; color: var(--ink-head); }
+h1 { font-size: 1.6rem; line-height: 1.15; }
+h2 { font-size: 1.7rem; line-height: 1.2; }
+h3 { font-family: var(--head); font-weight: 400; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink-head); margin: 1.75rem 0 0.6rem; }
+a { color: var(--blue); }
+code { font-family: var(--mono); font-size: 0.9em; }
+[hidden] { display: none !important; }
+
+.meta { font-size: 0.82rem; color: var(--ink-soft); }
+.kicker { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ---------- controls ---------- */
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button {
+  border: 0;
+  background: var(--card);
+  color: var(--ink);
+  padding: 0.6rem 1.25rem;
+  border-radius: 100px;
+  box-shadow: var(--lift);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+button:hover { transform: translateY(-1px); box-shadow: 0 6px 8px rgba(0, 0, 0, 0.22); }
+button:active { transform: translateY(1px); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
+button:disabled { opacity: 0.5; cursor: default; transform: none; }
+button.primary { background: var(--blue); color: #fff; }
+button.primary:hover { background: var(--blue-deep); }
+button.danger { color: var(--red); }
+button.linkish, a.linkish, button.back {
+  background: none; box-shadow: none; padding: 0.25rem 0; border-radius: 4px; transform: none;
+  font-size: 0.88rem; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+button.back { text-decoration: none; margin-bottom: 0.75rem; }
+button.danger.linkish { color: var(--red); margin-top: 2rem; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+label { display: block; font-size: 0.9rem; font-weight: 500; margin-top: 1rem; }
+input:not([type=checkbox]), select, textarea {
+  display: block; width: 100%; margin-top: 0.35rem;
+  padding: 0.65rem 0.9rem;
+  background: #fff; border: 1.5px solid var(--rule); border-radius: 12px;
+  font-weight: 400;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(51, 103, 181, 0.18); }
+input[type=checkbox] { accent-color: var(--blue); width: 1.05rem; height: 1.05rem; }
+textarea { resize: vertical; }
+label.check { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; margin-top: 0; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: flex-end; align-items: center; margin-top: 1.25rem; }
+.actions .check { margin-right: auto; }
+
+.error { color: var(--red); font-weight: 500; margin-top: 0.8rem; }
+.warn { font-size: 0.9rem; background: var(--cream); border-radius: 12px; padding: 0.65rem 0.95rem; margin-top: 1.2rem; }
+
+/* ---------- header band ---------- */
+
+.mast {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding: 1.1rem 1.5rem;
+  background: var(--olive);
+  color: #fff;
+}
+.mast h1 { color: #fff; }
+.mast .kicker { color: #fff; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.15rem; }
+/* The two overlapping circles from the school's mark. */
+.mast .kicker::before {
+  content: ""; width: 1.5rem; height: 1.1rem; flex: none;
+  background: radial-gradient(circle at 36% 42%, #fff 0 0.5rem, transparent 0.53rem),
+              radial-gradient(circle at 76% 68%, #fff 0 0.3rem, transparent 0.33rem);
+}
+.mast-tools { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+.mast button { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
+.mast button.primary { background: #fff; color: var(--ink); box-shadow: var(--lift); }
+.mast :focus-visible { outline-color: #fff; }
+
+.pill { font-size: 0.78rem; font-weight: 500; padding: 0.2rem 0.75rem; border-radius: 100px; background: var(--cream); color: var(--ink); white-space: nowrap; }
+.pill-ok { background: #fff; color: var(--olive-deep); }
+.pill-warn { background: var(--sand); }
+.pill-error { background: #fff; color: var(--red); }
+
+.status { font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.12rem 0.6rem; border-radius: 100px; white-space: nowrap; }
+.status-new { background: var(--lime); color: var(--plum); }
+.status-working { background: var(--blue); color: #fff; }
+.status-waiting { background: var(--sand); color: var(--ink); }
+.status-resolved { background: var(--olive-deep); color: #fff; }
+
+.code { font-family: var(--mono); font-weight: 500; letter-spacing: 0.04em; font-size: 0.85rem; }
+
+/* ---------- help station ---------- */
+
+.station .sheet {
+  max-width: 42rem; margin: 2.5rem auto 1.5rem; padding: 2.5rem;
+  background: var(--card); border-radius: 28px; box-shadow: var(--soft);
+}
+.lead { font-size: 2.3rem; }
+.sub { margin-top: 0.75rem; }
+.hint { margin-top: 1.75rem; font-size: 0.95rem; color: var(--ink-soft); }
+.choices { display: grid; gap: 0.9rem; margin-top: 2rem; }
+.choice {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; position: relative;
+  padding: 1rem 3.5rem 1rem 1.6rem; text-align: left;
+  background: var(--blue); color: #fff; font-size: 0.9rem;
+}
+.choice::after { content: "↗"; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); font-size: 1.4rem; }
+.choice:hover { background: var(--blue-deep); }
+.choice-alt, .choice-alt:hover { background: var(--lime); color: var(--plum); }
+.choice-big { font-family: var(--head); font-size: 1.35rem; font-weight: 400; letter-spacing: -0.02em; }
+.station form .primary { margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1.05rem; }
+.lookup { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+.lookup label { flex: 1 1 12rem; margin-top: 0.75rem; }
+.lookup .primary { margin-top: 0 !important; }
+.code-input { font-family: var(--mono); font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.foot { max-width: 42rem; margin: 0 auto 2rem; padding: 0 2rem; display: flex; justify-content: space-between; }
+
+/* The ticket: the site's blue-to-green wash on the code, details beside it. */
+.stub { display: flex; margin: 1.75rem 0 1.25rem; border-radius: 22px; overflow: hidden; background: var(--cream); }
+.stub-main {
+  padding: 1.25rem 1.75rem; display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(200deg, var(--blue), #4d7f8d 70%, #5a8c7c); color: #fff;
+}
+.stub-main .meta { color: inherit; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+.stub-code { font-family: var(--mono); font-weight: 500; font-size: 2.1rem; letter-spacing: 0.05em; line-height: 1.15; white-space: nowrap; }
+.stub-side { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; justify-content: center; min-width: 0; }
+
+/* ---------- notes (both pages) ---------- */
+
+.notes { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.notes li { background: var(--cream); border-radius: 14px; padding: 0.7rem 1rem; }
+.notes li.is-shared { background: #e3ebf7; }
+.station .notes li { background: #e3ebf7; }
+.notes p { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* ---------- staff desk ---------- */
+
+.banner { padding: 0.6rem 1.5rem; background: var(--plum); color: var(--cream); font-size: 0.92rem; }
+.bench { display: grid; grid-template-columns: minmax(19rem, 25rem) 1fr; align-items: start; gap: 1.5rem; max-width: 78rem; margin: 0 auto; padding: 1.5rem; }
+.queue { min-width: 0; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tabs button { padding: 0.3rem 0.85rem; font-size: 0.85rem; background: transparent; box-shadow: inset 0 0 0 1.5px var(--rule); }
+.tabs button[aria-selected=true] { background: var(--ink); color: #fff; box-shadow: none; }
+.count { font-family: var(--mono); opacity: 0.75; }
+#search { margin: 0.9rem 0; border-radius: 100px; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.row-btn {
+  display: grid; gap: 0.25rem; width: 100%; text-align: left;
+  padding: 0.85rem 1.1rem; border-radius: 18px; box-shadow: 0 1px 3px rgba(46, 28, 35, 0.12); font-size: 1rem;
+}
+.row-btn:hover { box-shadow: 0 4px 10px rgba(46, 28, 35, 0.16); }
+.row-btn.is-on { box-shadow: 0 0 0 2.5px var(--blue), 0 4px 10px rgba(46, 28, 35, 0.16); }
+.row-top, .row-bot { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.row-top strong { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-top .meta, .row-bot .meta { margin-left: auto; white-space: nowrap; }
+.row-mid { font-size: 0.9rem; color: var(--ink-soft); }
+.flag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: var(--red); padding: 0.05rem 0.55rem; border-radius: 100px; }
+.empty { color: var(--ink-soft); padding: 1.5rem 0.25rem; }
+
+.detail { padding: 2rem 2.25rem 2.5rem; min-width: 0; background: var(--card); border-radius: 28px; box-shadow: var(--soft); }
+.detail > .empty { padding: 1rem 0; }
+.detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.detail-head h2 { font-size: 2.1rem; margin: 0.5rem 0 0.2rem; overflow-wrap: anywhere; }
+.detail-head .back { display: none; }
+.code-big { font-size: 0.9rem; background: var(--lime); color: var(--plum); padding: 0.2rem 0.75rem; border-radius: 100px; }
+.status-bar { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 1.5rem; padding: 0.25rem; background: var(--page); border-radius: 100px; width: fit-content; max-width: 100%; }
+.status-btn { background: transparent; box-shadow: none; padding: 0.45rem 1rem; font-size: 0.9rem; flex: 1 1 auto; }
+.status-btn:hover { background: #fff; box-shadow: none; transform: none; }
+.status-btn.is-on, .status-btn.is-on:hover { background: var(--blue); color: #fff; box-shadow: var(--lift); }
+.controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.25rem; }
+.controls select { min-width: 12rem; }
+.controls .check { padding-bottom: 0.7rem; }
+.ask { margin: 1.75rem 0 0; padding: 1.1rem 1.35rem; background: var(--page); border-radius: 18px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 1.08rem; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.9rem 1.5rem; margin: 1.25rem 0 0; }
+.facts dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.note-form { margin-top: 1rem; }
+.note-form .actions { margin-top: 0.7rem; }
+
+/* ---------- dialogs ---------- */
+
+dialog { border: 0; border-radius: 28px; box-shadow: 0 20px 60px rgba(46, 28, 35, 0.35); background: var(--card); color: var(--ink); padding: 2rem; width: min(34rem, calc(100vw - 2rem)); }
+dialog::backdrop { background: rgba(46, 28, 35, 0.5); }
+dialog p { margin-top: 0.7rem; }
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 760px) {
+  .mast { padding: 1rem; }
+  .station .sheet { margin: 1rem; padding: 1.5rem; border-radius: 22px; }
+  .foot { padding: 0 1.5rem; }
+  .lead { font-size: 1.8rem; }
+  .row { grid-template-columns: 1fr; }
+  .stub { flex-direction: column; }
+  .bench { grid-template-columns: 1fr; padding: 1rem; }
+  .detail { display: none; padding: 1.5rem; border-radius: 22px; }
+  .detail-head h2 { font-size: 1.7rem; }
+  .has-selection .queue { display: none; }
+  .has-selection .detail { display: block; }
+  .detail-head .back { display: block; white-space: nowrap; }
+  .status-bar { border-radius: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) { button { transition: none; } }
+
+.mail-line { margin-top: 1rem; }
+.mail-line .linkish { color: var(--blue); font-size: 0.95rem; }
+
+/* ---------- staff sign in ---------- */
+
+.gate { max-width: 30rem; margin: 3rem auto; padding: 2.5rem; background: var(--card); border-radius: 28px; box-shadow: var(--soft); }
+.gate .actions { justify-content: space-between; }
+.gate .actions .primary { margin-left: auto; padding: 0.7rem 1.6rem; }
+.locked .bench, .locked .banner, .locked .mast-tools { display: none; }
+.accts { list-style: none; padding: 0; margin: 0.6rem 0 0; display: grid; gap: 0.25rem; font-size: 0.95rem; }
+.accts strong { font-weight: 500; }
+.accts .linkish { margin-left: 0.4rem; }
+@media (max-width: 760px) { .gate { margin: 1rem; padding: 1.5rem; border-radius: 22px; } }

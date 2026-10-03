@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-role="station">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yearbook Order Help</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Fira+Sans:wght@400;500;600&family=Manrope:wght@300;400&display=swap">
+  <link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body class="station">
+  <header class="mast">
+    <div>
+      <p class="kicker">Black Pine Circle School</p>
+      <h1 id="title">Yearbook Order Help</h1>
+    </div>
+    <span id="syncPill" class="pill" hidden></span>
+  </header>
+
+  <main id="view" class="sheet"></main>
+
+  <footer class="foot">
+    <button id="setupBtn" class="linkish" type="button">Station setup</button>
+    <a class="linkish" href="desk/">Staff desk</a>
+  </footer>
+
+  <dialog id="setupDlg">
+    <form method="dialog" id="setupForm">
+      <h2>Station setup</h2>
+      <div id="setupBody"></div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js?v=5"></script>
+  <script src="js/util.js?v=5"></script>
+  <script src="js/store.js?v=5"></script>
+  <script src="js/sync.js?v=5"></script>
+  <script src="js/accounts.js?v=5"></script>
+  <script src="js/station.js?v=5"></script>
+</body>
+</html>
